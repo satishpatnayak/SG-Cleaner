@@ -26,6 +26,10 @@ regions = ['ap-south-1','us-east-1', 'us-west-1', 'eu-west-1']
     'ap-northeast-1', 'ca-central-1', 'eu-central-1', 'eu-west-1', 'eu-west-2', 'eu-south-1', 'eu-west-3',
     'eu-north-1', 'me-south-1', 'sa-east-1'
 ]'''
+
+# List of security group IDs to exclude from deletion
+exception_list = []
+
 for region in regions:
     print("  --------------------------------------------------------------------------------");
     print(f"| Region: {region}                                                               |");
@@ -47,8 +51,10 @@ for region in regions:
         if not response['NetworkInterfaces']:
             unused_security_groups.append(group_id)
 
-   #print(f"[Info] - Unused Security Groups in region {region}:")
     for group_id in unused_security_groups:
+        if group_id in exception_list:
+            print(f"[Info] - Skipping security group {group_id} (in exception list)")
+            continue
         print(f"[Info] - Found unused Security Group {group_id}")
         try:
             ec2.delete_security_group(GroupId=group_id)

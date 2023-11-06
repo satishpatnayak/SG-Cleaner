@@ -17,9 +17,19 @@ Cloud Security Posture Management (CSPM) tools like Prowler or ScoutSuite can fl
 
 You can customize the list of AWS regions to scan by updating the `regions` list in the script (`sg-cleaner.py`).
 
+## Exception List
+
+You can specify a list of security groups that should be excluded from deletion. Edit the `exception_list` variable in the Python script to add the IDs of the security groups you want to protect.
+
+```python
+E.g.
+exception_list = ['sg-12345678', 'sg-87654321']
+```
+
 ## Usage
 
 1. Configure the AWS regions in `sg-cleaner.py`
+2. Update the `exception_list` or leave it blank
 2. Run the script 
 3. Provide your AWS profile name when prompted.
 4. The script will scan the specified AWS regions for unused security groups.
@@ -27,9 +37,12 @@ You can customize the list of AWS regions to scan by updating the `regions` list
 
 ## How to Run
 
-```
+```bash
 python3 sg-cleaner.py
 ```
+## Sample output
+![sg-cleaner help](sg-cleaner.png)
+
 ## Note
 Please be cautious when running this script, as it deletes security groups.
 ## Contributing
