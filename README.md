@@ -11,7 +11,7 @@ Cloud Security Posture Management (CSPM) tools like Prowler or ScoutSuite can fl
 - Python 3.x installed on your system.
 - Boto3 library installed. You can install it using the following command:<br>
  ``` pip3 install boto3```
-- AWS profile configured
+- AWS profile configured with required permissions to delete Security Groups
 
 ## Configuration
 
